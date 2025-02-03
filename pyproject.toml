@@ -11,11 +11,12 @@ fastapi = "^0.115.8"
 openai = "^1.61.0"
 uvicorn = "^0.34.0"
 python-dotenv = "^1.0.1"
+pymongo = "^4.11"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.poetry.scripts]
-start = "uvicorn main:app --reload"
+
+package-mode = false
