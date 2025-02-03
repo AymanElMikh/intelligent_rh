@@ -1,17 +1,20 @@
 import json
-from fastapi import FastAPI, HTTPException
-from modules.interviewer.dto import InterviewContextDTO, InterviewResponseDTO, QuestionDTO
+from fastapi import FastAPI, HTTPException, Depends
+from modules.interviewer.dto import InterviewResponseDTO, QuestionDTO
 from modules.interviewer.services.questions_generation import generate_interview_questions
+from pymongo import MongoClient
+from db.mongodb import DBConnection
 
 app = FastAPI()
 
-@app.post("/generate-questions", response_model=InterviewResponseDTO)
-def generate_questions(context: InterviewContextDTO):
+
+@app.post("/generate-questions/{employee_id}", response_model=InterviewResponseDTO)
+def generate_questions(employee_id: str):
     """
-    Generate structured professional interview questions based on the employee's profile.
+    Generate structured professional interview questions for a specific employee.
     """
     try:
-        questions_json = generate_interview_questions(context)
+        questions_json = generate_interview_questions(employee_id)
 
         print("OpenAI API Response:", questions_json)
 
@@ -28,23 +31,6 @@ def generate_questions(context: InterviewContextDTO):
         ]
 
         return InterviewResponseDTO(
-            employee_name=context.employee_name,
-            role=context.role,
-            department=context.department,
-            years_in_company=context.years_in_company,
-            experience=context.experience,
-            last_promotion_date=context.last_promotion_date,
-            last_training=context.last_training,
-            performance_feedback=context.performance_feedback,
-            key_responsibilities=context.key_responsibilities,
-            career_goals=context.career_goals,
-            company_name=context.company_name,
-            company_growth_strategy=context.company_growth_strategy,
-            available_trainings=context.available_trainings,
-            internal_mobility_policies=context.internal_mobility_policies,
-            interview_type=context.interview_type,
-            num_questions=context.num_questions,
-            interview_phase=parsed_response["interview_phase"],
             questions=structured_questions
         )
 
