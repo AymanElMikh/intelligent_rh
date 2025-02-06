@@ -73,18 +73,24 @@ def generate_interview_questions(employee_id: str) -> str:
         context = {
             **employee,  
             **company,  
-            "num_questions": 5 
+            "num_questions": 10
         }
 
         formatted_content = format_content_prompt(content_prompt, context)
 
         client = openai.OpenAI(api_key=OPENAI_API_KEY)
         response = client.chat.completions.create(
-            model="gpt-4-turbo",
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": formatted_content}
-            ]
+            ],
+            temperature=1,
+            max_completion_tokens=6700,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
+
         )
 
         response_text = response.choices[0].message.content.strip()
