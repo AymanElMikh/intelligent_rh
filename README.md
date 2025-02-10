@@ -34,7 +34,7 @@ The **Intelligent HR Interview Assistant** is a backend-powered system designed 
 ## 🔧 **Tech Stack**
 - **Backend Framework:** FastAPI (Python 3.12)
 - **AI & NLP:** OpenAI API (GPT-4 Turbo)
-- **Database:** (MongoDB/PostgreSQL - to be determined)
+- **Database:** MongoDB
 - **Dependency Management:** Poetry
 - **Server:** Uvicorn
 
@@ -56,6 +56,8 @@ poetry install
 Create a `.env` file in the root directory and add:
 ```ini
 OPENAI_API_KEY=your_api_key_here
+MONGO_URI=mogo_db_data_base_url
+DATABASE_NAME=data_base_name
 CORS_ORIGINS="*"
 HTTP_METHODS="*"
 ```
@@ -94,18 +96,22 @@ poetry run uvicorn rh_api.main:app --reload
   "interview_type": "Career Development",
   "num_questions": 5
 }
-```
 
-**Response:**
-```json
-{
-  "interview_phase": "Career Development",
-  "questions": [
-    { "id": 1, "type": "career_growth", "question": "What new challenges would you like to take on?" },
-    { "id": 2, "type": "training", "question": "What other skills do you wish to develop?" }
-  ]
-}
-```
+# API Documentation for Interview Questions Generation
+
+## 🎯 Endpoint: `/generate-questions/{employee_id}/{interview_phase}`
+**Method:** `POST`
+
+### Path Parameters:
+- `employee_id`: The unique identifier of the employee (string).
+- `interview_phase`: The specific interview phase to generate questions for (e.g., `"career_review"`, `"career_perspectives"`, etc.) (string).
+
+### Response:
+- `true`: If the request was successfully processed.
+
+---
+
+This endpoint generates personalized interview questions for a specific employee based on the chosen interview phase.
 
 ---
 
