@@ -10,13 +10,13 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-PROMPT_DIR = BASE_DIR / "prompts"
+PROMPT_DIR = BASE_DIR / "promptsv2"
 
-def load_prompt(filename: str) -> str:
+def load_prompt(interview_phase: str) -> str:
     """Load a prompt file from the PROMPT folder."""
-    file_path = PROMPT_DIR / filename
+    file_path = PROMPT_DIR / interview_phase / "prompt.txt"
     if not file_path.exists():
-        raise FileNotFoundError(f"Error: The prompt file '{filename}' was not found in {PROMPT_DIR}")
+        raise FileNotFoundError(f"Error: The prompt file '{interview_phase}' was not found in {PROMPT_DIR}")
     
     return file_path.read_text(encoding="utf-8").strip()
 
@@ -62,19 +62,15 @@ def clean_json_response(response_text: str) -> str:
     except json.JSONDecodeError:
         raise ValueError(f"Invalid JSON format from OpenAI response: {response_text}")
 
-def generate_interview_questions(employee_id: str) -> str:
+def generate_interview_questions(employee_id: str, interview_phase: str) -> str:
     """Generate structured interview questions for an employee using OpenAI."""
     try:
         system_prompt = load_prompt("system_prompt.txt")
-        content_prompt = load_prompt("content_prompt.txt")
+        content_prompt = load_prompt(interview_phase)
 
         employee, company = fetch_employee_and_company(employee_id)
 
-        context = {
-            **employee,  
-            **company,  
-            "num_questions": 10
-        }
+        context = get_custom_context(employee, company, interview_phase)
 
         formatted_content = format_content_prompt(content_prompt, context)
 
@@ -90,7 +86,6 @@ def generate_interview_questions(employee_id: str) -> str:
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0
-
         )
 
         response_text = response.choices[0].message.content.strip()
@@ -108,3 +103,33 @@ def generate_interview_questions(employee_id: str) -> str:
         raise ValueError(f"OpenAI API Error: {str(e)}")
     except ValueError as ve:
         raise ValueError(f"Processing Error: {str(ve)}")
+
+def get_custom_context(employee: dict, company: dict, interview_phase: str) -> dict:
+    
+    if interview_phase == "career_growth":
+        return {
+            "employee_name": employee.get("employee_name"),
+            "role": employee.get("role"),
+            "years_in_company": employee.get("years_in_company"),
+            "last_training": employee.get("last_training"),
+            "performance_feedback": employee.get("performance_feedback"),
+            "skills": employee.get("skills"),
+            "current_projects": employee.get("current_projects"),
+            "num_questions": 10 
+        }
+    
+    elif interview_phase == "technical":
+        return {
+            "employee_name": employee.get("employee_name"),
+            "role": employee.get("role"),
+            "skills": employee.get("skills"),
+            "current_projects": employee.get("current_projects"),
+            "experience": employee.get("experience"),
+            "num_questions": 10
+        }
+    else:
+        return {
+            **employee,
+            **company,
+            "num_questions": 10
+        }

@@ -1,0 +1,42 @@
+{
+    "phase": "career_growth",
+    "description": "Analyzing the skills developed, training received, and difficutiels encountered by the employee.",
+    "context": {
+      "include": [
+        "employee_name",
+        "role",
+        "years_in_company",
+        "last_training",
+        "performance_feedback",
+        "key_responsibilities",
+        "skills",
+        "current_projects"
+      ]
+    },
+    "instructions": "Generate {num_questions} personalized questions focusing on the employee’s skill evolution and challenges.",
+    "few_shot_examples": [
+      {
+        "input": {
+          "employee_name": "John Doe",
+          "role": "Software Engineer",
+          "years_in_company": 5,
+          "last_training": "Advanced Java",
+          "performance_feedback": "Strong coding skills; needs improvement in leadership.",
+          "key_responsibilities": "Backend development and API optimization",
+          "skills": ["Java", "Spring Boot"],
+          "current_projects": "Developing microservices architecture"
+        },
+        "output": {
+          "interview_phase": "career_growth",
+          "questions": [
+            {
+              "id": 1,
+              "type": "skills_evolution",
+              "question": "Over the last {years_in_company} years, which skills do you feel have grown the most, and which areas would you like to further improve?"
+            }
+          ]
+        }
+      }
+    ]
+  }
+  

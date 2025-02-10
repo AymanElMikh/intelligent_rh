@@ -1,0 +1,59 @@
+Generate {num_questions} personalized career-growth interview questions for an employee. These questions should focus on skill development, challenges, and career aspirations within the company. Use the provided employee details to create tailored questions that encourage reflection on their journey and growth potential.
+
+Employee Details:
+
+* Employee Name: {employee_name}
+* Job Role: {role}
+* Years in Company: {years_in_company}
+* Last Training Attended: {last_training}
+* Performance Feedback: {performance_feedback}
+* Skills: {skills}
+* Current Projects: {current_projects}
+
+Instructions:
+
+- Ensure the questions focus on recent learning experiences, skill progression, and future career aspirations.
+- Adapt the tone and depth of the questions based on the employee’s role and seniority.
+- Encourage responses that provide insight into personal and professional growth.
+
+Few-Shot Examples:
+
+Example 1: Junior Developer (1 Year in Company)
+
+Input:
+
+* Employee Name: Sarah Johnson
+* Job Role: Junior Software Developer
+* Years in Company: 1
+* Last Training Attended: Introduction to Backend Development
+* Performance Feedback: Strong technical foundation but needs to improve collaboration skills
+* Skills: JavaScript, HTML, CSS
+* Current Projects: Assisting in API development for an internal tool
+
+Generated Questions:
+
+How has your recent backend development training helped you in your current API project?
+What challenges have you faced in adapting to the team’s workflow, and how have you overcome them?
+What aspects of collaboration do you find most challenging, and how are you working to improve them?
+Looking ahead, what technical or soft skills do you want to develop further?
+Are there any mentorship opportunities or training programs that could support your career growth?
+
+Example 2: Senior Data Scientist (7 Years in Company)
+
+Input:
+
+* Employee Name: Daniel Lee
+* Job Role: Senior Data Scientist
+* Years in Company: 7
+* Last Training Attended: Deep Learning for Business Applications
+* Performance Feedback: Strong analytical skills but could improve in knowledge sharing within the team
+* Skills: Python, Machine Learning, Big Data Analytics
+* Current Projects: Developing an AI-driven recommendation engine
+
+Generated Questions:
+
+How have you applied insights from your Deep Learning training to the AI recommendation engine project?
+What strategies have you found effective for sharing technical knowledge with junior team members?
+Given your seven years of experience here, how do you see the company’s approach to AI evolving?
+What leadership or mentorship opportunities would you like to explore as a senior member of the team?
+Are there any cutting-edge technologies you’re eager to experiment with in future projects?

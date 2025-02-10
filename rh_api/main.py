@@ -1,5 +1,5 @@
 import json
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Query
 from modules.interviewer.dto import InterviewResponseDTO, QuestionDTO
 from modules.interviewer.services.questions_generation import generate_interview_questions
 from pymongo import MongoClient
@@ -7,14 +7,16 @@ from db.mongodb import DBConnection
 
 app = FastAPI()
 
-
 @app.post("/generate-questions/{employee_id}", response_model=InterviewResponseDTO)
-def generate_questions(employee_id: str):
+def generate_questions(
+    employee_id: str, 
+    interview_phase: str = Query("career_growth", description="The interview phase to generate questions for")
+):
     """
-    Generate structured professional interview questions for a specific employee.
+    Generate structured interview questions for a specific employee, including the interview phase.
     """
     try:
-        questions_json = generate_interview_questions(employee_id)
+        questions_json = generate_interview_questions(employee_id, interview_phase)
 
         print("OpenAI API Response:", questions_json)
 
@@ -26,11 +28,16 @@ def generate_questions(employee_id: str):
         questions_list = parsed_response["questions"]
 
         structured_questions = [
-            QuestionDTO(id=idx + 1, type=q.get("type", "general"), question=q["question"])
+            QuestionDTO(
+                id=idx + 1,
+                type=q.get("type", "general"),
+                question=q["question"]
+            )
             for idx, q in enumerate(questions_list)
         ]
 
         return InterviewResponseDTO(
+            interview_phase=parsed_response["interview_phase"],
             questions=structured_questions
         )
 
