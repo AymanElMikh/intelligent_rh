@@ -1,3 +1,4 @@
+
 # 📌 Intelligent HR Interview Assistant
 
 ## 🏆 **Project Overview**
@@ -75,43 +76,15 @@ poetry run uvicorn rh_api.main:app --reload
 
 ## 🎯 **Usage**
 ### **Generate Interview Questions**
-#### **Endpoint:** `/generate-questions`
-**Method:** `POST`
-**Request Body:**
-```json
-{
-  "employee_name": "John Doe",
-  "role": "Software Engineer",
-  "department": "IT",
-  "experience": 5,
-  "years_in_company": 2,
-  "last_promotion_date": "2023-05-10",
-  "last_training": "Advanced Python",
-  "performance_feedback": "Exceeds Expectations",
-  "career_goals": "Become a Tech Lead",
-  "company_name": "TechCorp",
-  "company_growth_strategy": "Expand AI capabilities",
-  "available_trainings": "Leadership Training, AI Ethics",
-  "internal_mobility_policies": "Open for internal transitions",
-  "interview_type": "Career Development",
-  "num_questions": 5
-}
-
-# API Documentation for Interview Questions Generation
-
-## 🎯 Endpoint: `/generate-questions/{employee_id}/{interview_phase}`
+#### **Endpoint:** `/generate-questions/{employee_id}/{interview_phase}`
 **Method:** `POST`
 
 ### Path Parameters:
 - `employee_id`: The unique identifier of the employee (string).
-- `interview_phase`: The specific interview phase to generate questions for (e.g., `"career_review"`, `"career_perspectives"`, etc.) (string).
+- `interview_phase`: The specific interview phase to generate questions for (e.g., `"career_review"`).
 
 ### Response:
 - `true`: If the request was successfully processed.
-
----
-
-This endpoint generates personalized interview questions for a specific employee based on the chosen interview phase.
 
 ---
 
@@ -155,4 +128,3 @@ This project is licensed under the **MIT License**.
 💡 **Author:** Ayman ElMikh  
 📧 **Email:** aymanmikh7@gmail.com  
 🔗 **GitHub:** [AymanElMikh](https://github.com/AymanElMikh)
-
