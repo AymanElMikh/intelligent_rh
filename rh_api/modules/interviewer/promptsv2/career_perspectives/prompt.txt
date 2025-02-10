@@ -1,0 +1,68 @@
+Generate {num_questions} Personalized Career Perspectives & Development Needs Interview Questions
+These questions should help the employee reflect on their long-term career aspirations, personal development goals, and alignment with the company’s vision. Use the provided employee details to create insightful and engaging questions that encourage self-assessment and proactive career planning.
+
+Employee Details:
+
+Employee Name: {employee_name}
+Job Role: {role}
+Years in Company: {years_in_company}
+Core Strengths & Skills: {skills}
+Current Challenges: {current_challenges}
+Professional Goals: {career_goals}
+Interest in Leadership or New Roles: {leadership_interest}
+Training & Development Needs: {training_needs}
+
+Instructions:
+
+Focus on long-term career aspirations and development paths.
+Encourage employees to reflect on skill gaps and opportunities for growth.
+Adapt the depth of the questions based on seniority and experience.
+Ensure the questions align with both employee ambitions and company needs.
+Promote open-ended responses that encourage deep reflection.
+
+
+Few-Shot Examples:
+
+Example 1: Mid-Level Software Engineer (3 Years in Company)
+
+Input:
+
+Employee Name: Alex Carter
+Job Role: Software Engineer
+Years in Company: 3
+Core Strengths & Skills: Java, Spring Boot, Microservices
+Current Challenges: Transitioning into system architecture design
+Professional Goals: Becoming a Senior Engineer within two years
+Interest in Leadership or New Roles: Open to mentoring junior developers
+Training & Development Needs: Advanced system design and leadership training
+
+Generated Questions:
+
+How do you see your role evolving within the next two years, and what steps are you taking to prepare for it?
+What technical skills do you think are most critical for transitioning into a senior engineering role?
+Are there aspects of system architecture design that you find particularly challenging? How do you plan to improve in those areas?
+Have you had opportunities to mentor junior developers? If so, how has that experience influenced your career goals?
+What kind of leadership training or professional development would be most beneficial for your growth?
+
+
+Example 2: Marketing Manager (6 Years in Company)
+
+Input:
+
+Employee Name: Rachel Adams
+Job Role: Marketing Manager
+Years in Company: 6
+Core Strengths & Skills: Digital marketing, campaign strategy, brand management
+Current Challenges: Scaling marketing efforts with limited resources
+Professional Goals: Transitioning to a director-level role in strategic branding
+Interest in Leadership or New Roles: Interested in leading cross-functional teams
+Training & Development Needs: Executive leadership training, strategic planning
+
+Generated Questions:
+
+As you work towards a director-level position, what leadership skills do you feel need the most refinement?
+How do you balance the challenges of resource constraints while driving successful marketing campaigns?
+What aspects of strategic branding do you enjoy the most, and how do you see yourself shaping the company’s future brand identity?
+Have you considered any executive leadership programs or mentorship opportunities to support your career growth?
+What kind of cross-functional collaboration would you like to be more involved in, and how can the company support that?
+This prompt ensures that the Career Perspectives & Development Needs questions focus on future growth, skill development, and alignment with both personal and organizational goals. Would you like any refinements or additional details? 🚀

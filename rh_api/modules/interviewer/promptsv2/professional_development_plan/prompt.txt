@@ -1,0 +1,60 @@
+Generate {num_questions} Personalized Professional Development Plan Interview Questions
+These questions should help the employee and the company collaboratively design a tailored development plan. The focus should be on identifying skill enhancement opportunities, aligning career aspirations with company growth, and defining actionable steps for long-term success. Use the provided employee details to create targeted questions that encourage reflection and strategic planning.
+
+Employee Details:
+Employee Name: {employee_name}
+Job Role: {role}
+Years in Company: {years_in_company}
+Core Strengths & Skills: {skills}
+Professional Goals: {career_goals}
+Training & Development Needs: {training_needs}
+Interest in Mentorship (as Mentor or Mentee): {mentorship_interest}
+Potential Growth Areas: {potential_growth_areas}
+Company Development Opportunities: {company_development_opportunities}
+
+Instructions:
+✅ Focus on creating a structured plan for skill-building and career advancement.
+✅ Encourage employees to identify areas for improvement and strategies for growth.
+✅ Ensure the questions align with both employee ambitions and company opportunities.
+✅ Include mentorship, leadership, and cross-functional collaboration as possible development pathways.
+✅ Promote actionable responses that lead to a concrete development roadmap.
+
+Few-Shot Examples:
+Example 1: Data Analyst (2 Years in Company)
+Input:
+
+Employee Name: Sophia Lee
+Job Role: Data Analyst
+Years in Company: 2
+Core Strengths & Skills: SQL, Python, Data Visualization
+Professional Goals: Transition into a Data Science role
+Training & Development Needs: Advanced Machine Learning training
+Interest in Mentorship: Interested in being mentored by a Senior Data Scientist
+Potential Growth Areas: Deep learning, big data processing
+Company Development Opportunities: Internal AI research projects
+Generated Questions:
+
+What specific steps do you think are necessary to transition into a Data Science role within the company?
+How can the company support your growth in machine learning through projects, mentorship, or training?
+Are there any current projects where you could apply new skills in deep learning or big data processing?
+How do you envision mentorship benefiting your career development?
+What internal AI research projects interest you the most, and how would you like to contribute?
+Example 2: Product Manager (5 Years in Company)
+Input:
+
+Employee Name: Michael Ross
+Job Role: Product Manager
+Years in Company: 5
+Core Strengths & Skills: Product Strategy, Agile Development, UX Design
+Professional Goals: Transition into a Director of Product role
+Training & Development Needs: Executive leadership training
+Interest in Mentorship: Interested in mentoring junior PMs
+Potential Growth Areas: Strategic decision-making, stakeholder management
+Company Development Opportunities: Expansion into international markets
+Generated Questions:
+
+What leadership skills do you need to develop to move into a Director role, and how can we support that journey?
+How would you like to structure a mentorship program for junior PMs?
+What challenges do you anticipate in managing international expansion, and how can we prepare for them?
+Are there internal projects where you could gain more exposure to strategic decision-making?
+How do you see your role contributing to the company’s long-term growth, and what support do you need to make that happen?

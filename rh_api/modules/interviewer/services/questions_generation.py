@@ -20,6 +20,14 @@ def load_prompt(interview_phase: str) -> str:
     
     return file_path.read_text(encoding="utf-8").strip()
 
+def load_system_prompt() -> str:
+    """Load a system prompt file from the PROMPT folder."""
+    file_path = PROMPT_DIR / "system_prompt.txt"
+    if not file_path.exists():
+        raise FileNotFoundError(f"Error: The prompt file system_prompt.txt was not found in {PROMPT_DIR}")
+    
+    return file_path.read_text(encoding="utf-8").strip()
+
 def fetch_employee_and_company(employee_id: str):
     """Retrieve employee and company information from MongoDB."""
     db = DBConnection()
@@ -44,28 +52,29 @@ def format_content_prompt(content_prompt, context):
         content_prompt = content_prompt.replace(f"{{{key}}}", str(value))
     return content_prompt
 
-def clean_json_response(response_text: str) -> str:
-    """Ensure JSON validity by stripping unwanted characters and validating structure."""
+
+def parse_interview_response(json_data):
+    """
+    Parses the JSON data containing interview phases and questions.
+    Returns a structured summary.
+    """
     try:
-        cleaned_text = re.sub(r"```json|```", "", response_text).strip()
-
-        if not cleaned_text:
-            raise ValueError("OpenAI API returned an empty response.")
-
-        response_data = json.loads(cleaned_text)
-
-        if "interview_phase" not in response_data or "questions" not in response_data:
-            raise ValueError("Missing 'interview_phase' or 'questions' key in OpenAI response.")
-
-        return json.dumps(response_data, ensure_ascii=False, indent=2)
+        if isinstance(json_data, str):
+           return  json.loads(json_data)
+        elif isinstance(json_data, dict):
+           return  json_data
+        else:
+            raise ValueError("Invalid input type: expected str or dict.")
 
     except json.JSONDecodeError:
-        raise ValueError(f"Invalid JSON format from OpenAI response: {response_text}")
+        raise ValueError("Invalid JSON format")
+    except Exception as e:
+        raise ValueError(f"Error parsing response: {str(e)}")
 
 def generate_interview_questions(employee_id: str, interview_phase: str) -> str:
     """Generate structured interview questions for an employee using OpenAI."""
     try:
-        system_prompt = load_prompt("system_prompt.txt")
+        system_prompt = load_system_prompt()
         content_prompt = load_prompt(interview_phase)
 
         employee, company = fetch_employee_and_company(employee_id)
@@ -95,7 +104,7 @@ def generate_interview_questions(employee_id: str, interview_phase: str) -> str:
         if not response_text:
             raise ValueError("OpenAI API returned an empty response.")
 
-        return clean_json_response(response_text)
+        return parse_interview_response(response_text)
 
     except FileNotFoundError as e:
         raise ValueError(f"File Error: {str(e)}")
@@ -106,7 +115,7 @@ def generate_interview_questions(employee_id: str, interview_phase: str) -> str:
 
 def get_custom_context(employee: dict, company: dict, interview_phase: str) -> dict:
     
-    if interview_phase == "career_growth":
+    if interview_phase == "career_review":
         return {
             "employee_name": employee.get("employee_name"),
             "role": employee.get("role"),
@@ -115,18 +124,35 @@ def get_custom_context(employee: dict, company: dict, interview_phase: str) -> d
             "performance_feedback": employee.get("performance_feedback"),
             "skills": employee.get("skills"),
             "current_projects": employee.get("current_projects"),
-            "num_questions": 10 
+            "num_questions": 10
         }
     
-    elif interview_phase == "technical":
+    elif interview_phase == "career_perspectives":
         return {
             "employee_name": employee.get("employee_name"),
             "role": employee.get("role"),
+            "years_in_company": employee.get("years_in_company"),
             "skills": employee.get("skills"),
-            "current_projects": employee.get("current_projects"),
-            "experience": employee.get("experience"),
+            "current_challenges": employee.get("current_challenges"),
+            "career_goals": employee.get("career_goals"),
+            "leadership_interest": employee.get("leadership_interest"),
+            "training_needs": employee.get("training_needs"),
             "num_questions": 10
         }
+    elif interview_phase == "professional_development_plan":
+        return {
+            "employee_name": employee.get("employee_name"),
+            "role": employee.get("role"),
+            "years_in_company": employee.get("years_in_company"),
+            "core_strengths": employee.get("skills"),
+            "professional_goals": employee.get("career_goals"),
+            "training_and_development_needs": employee.get("training_needs"),
+            "mentorship_interest": employee.get("mentorship_interest"),
+            "potential_growth_areas": employee.get("potential_growth_areas"),
+            "company_development_opportunities": company.get("development_opportunities"),
+            "num_questions": 10
+        }
+
     else:
         return {
             **employee,
